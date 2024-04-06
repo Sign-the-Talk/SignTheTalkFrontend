@@ -1,0 +1,13 @@
+{
+    "welcome_page": {
+        "page_title": "Sign the Talk - Realtime Sign Language Translation",
+        "page_subtitle": "Detect, Translate, Speak out LOUD",
+        "button__start_now": "Start Now",
+        "button__more_info": "More Information"
+    },
+    "lang": {
+        "en": "English",
+        "ja": "Japanese (日本語)",
+        "zh": "Chinese (中文)"
+    }
+}

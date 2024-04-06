@@ -1,0 +1,13 @@
+{
+    "welcome_page": {
+        "page_title": "Sign the Talk - 即時手話通訳",
+        "page_subtitle": "像から意へ，意から声を",
+        "button__start_now": "通訳を始める",
+        "button__more_info": "さらなる情報"
+    },
+    "lang": {
+        "en": "英語 (English)",
+        "ja": "日本語",
+        "zh": "中国語 (中文)"
+    }
+}

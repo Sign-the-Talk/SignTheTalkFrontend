@@ -1,0 +1,4 @@
+# For the file that is created because of your system/IDE,
+#  please move them into `.git/info/exclude`.
+node_modules/
+.next/

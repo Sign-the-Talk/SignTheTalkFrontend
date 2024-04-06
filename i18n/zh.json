@@ -1,0 +1,13 @@
+{
+    "welcome_page": {
+        "page_title": "Sign the Talk - 您的实时手语翻译官",
+        "page_subtitle": "探手取悟，悟中声有",
+        "button__start_now": "立即开始",
+        "button__more_info": "进一步了解"
+    },
+    "lang": {
+        "en": "英语 (English)",
+        "ja": "日语 (日本語)",
+        "zh": "中文"
+    }
+}
