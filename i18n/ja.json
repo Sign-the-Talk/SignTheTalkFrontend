@@ -5,6 +5,17 @@
         "button__start_now": "通訳を始める",
         "button__more_info": "さらなる情報"
     },
+    "chat": {
+        "title__just_entered": "翻訳機能準備完了",
+        "title__translating": "翻訳しています",
+        "title__stopped": "翻訳完了，待機中",
+        "title__error": "ごめん，今は作動できません",
+        "desc__just_entered": "押釦を押してから手話通訳を開始して，もう一度押すと翻訳を停止します。",
+        "desc__translating": "手話を見せてください。",
+        "desc__stopped": "翻訳は今停止しています",
+        "desc__error": "幾つかの不具合により作動不能になりました，詳しい説明はこちらです:",
+        "start_button": "翻訳開始"
+    },
     "lang": {
         "en": "英語 (English)",
         "ja": "日本語",

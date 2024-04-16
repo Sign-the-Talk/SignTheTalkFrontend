@@ -5,6 +5,17 @@
         "button__start_now": "立即开始",
         "button__more_info": "进一步了解"
     },
+    "chat": {
+        "title__just_entered": "Your Translator is Ready",
+        "title__translating": "Now Translating",
+        "title__stopped": "Translation Stop",
+        "title__error": "Sorry, We Cannot Work Now",
+        "desc__just_entered": "Click the button to start translating, and click again to stop.",
+        "desc__translating": "Please start talking in sign language.",
+        "desc__stopped": "The translation is stopped.",
+        "desc__error": "Some errors just occured and we cannot proceed, the reason is as follow:",
+        "start_button": "Start Translation"
+    },
     "lang": {
         "en": "英语 (English)",
         "ja": "日语 (日本語)",
