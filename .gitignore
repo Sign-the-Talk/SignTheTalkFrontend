@@ -2,3 +2,4 @@
 #  please move them into `.git/info/exclude`.
 node_modules/
 .next/
+**/__pycache__/

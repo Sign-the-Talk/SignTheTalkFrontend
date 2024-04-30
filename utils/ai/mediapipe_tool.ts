@@ -1,4 +1,4 @@
-import { GestureRecognizer, FilesetResolver, DrawingUtils } from "@mediapipe/tasks-vision"
+import { GestureRecognizer, FilesetResolver, GestureRecognizerResult as GestureRecogniserResult } from "@mediapipe/tasks-vision"
 
 let gesture_recogniser: GestureRecognizer | null = null
 
@@ -20,12 +20,20 @@ export async function prepareMediapipe()
 
 let should_continue_detect = false
 
-export function startDetecting()
+/**
+ * Currently only use video element to detect.
+ * Not using photo-wise detect.
+ */
+export function startDetectingFromVideo({ processResult }: startDetectingFromVideo_Args)
 {
-    const video_element = document.getElementById("webcam_video") as HTMLVideoElement
+    const video = document.getElementById("webcam_video") as HTMLVideoElement
     console.log(`startDetecting`)
     should_continue_detect = true
-    detectGesture(video_element)
+    detectGestureFromVideo({ video, processResult })
+}
+
+type startDetectingFromVideo_Args = {
+    processResult: (result: GestureRecogniserResult) => any
 }
 
 export function stopDetecting()
@@ -34,7 +42,7 @@ export function stopDetecting()
     should_continue_detect = false
 }
 
-export async function detectGesture(video: HTMLVideoElement)
+export function detectGestureFromVideo({ video, processResult }: detectGestureFromVideo_Args)
 {
     if (gesture_recogniser == null)
     {
@@ -44,11 +52,16 @@ export async function detectGesture(video: HTMLVideoElement)
     const recognise_result = gesture_recogniser.recognizeForVideo(video, time_now__ms)
 
     // Continue according to switch.
-    if (should_continue_detect) { requestAnimationFrame(() => detectGesture(video)) }
+    if (should_continue_detect) { requestAnimationFrame(() => detectGestureFromVideo({ video, processResult })) }
 
     // If there is a valid gesture, then return
     if (recognise_result.gestures.length > 0)
     {
-        console.log(`Result at ${time_now__ms}:`, recognise_result)
+        console.log(`Result at ${time_now__ms} (hand: ${recognise_result.landmarks.length}):`, recognise_result)
+        processResult(recognise_result)
     }
 }
+
+type detectGestureFromVideo_Args = {
+    video: HTMLVideoElement
+} & startDetectingFromVideo_Args
