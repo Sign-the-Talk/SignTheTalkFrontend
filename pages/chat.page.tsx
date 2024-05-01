@@ -41,11 +41,18 @@ enum PageStatus
     error = "error"
 }
 
+/**
+ * The threshold of cutting a translated sentence as a full sentence in milliseconds.
+ */
+const threshold__cut_sentence_time_limit = 1000
+
 export default function ChatPage()
 {
     let [page_status, setPageStatus] = useState(PageStatus.just_entered)
+    let [translated_texts, setTranslatedTexts] = useState<string[]>([])
     let media_stream = useRef<MediaStream | null>(null)
     let web_socket = useRef<WebSocket | null>(null)
+    let last_translation_got = useRef(Date.now())
     const { text } = useI18N()
     const { title, description, button } = getPageElementAccordingToStatus()
 
@@ -58,7 +65,9 @@ export default function ChatPage()
                 {button}
                 <video id="webcam_video" autoPlay={true} playsInline={true} />
             </div>
-            <div id="right_panel"></div>
+            <div id="right_panel">
+                {translated_texts.map((t, i) => (<div className="word" key={`${i}:${t}`}>{t}</div>))}
+            </div>
         </div>)
     }
 
@@ -125,6 +134,7 @@ export default function ChatPage()
 
     function startChat()
     {
+        setTranslatedTexts([])
         requestOpenFrontCamera()
             .then(
                 function (stream)
@@ -149,7 +159,24 @@ export default function ChatPage()
 
     function handleWebSocketMessage(event: MessageEvent)
     {
-        console.log(`Got parsed result: ${event.data}`)
+        const parsed_word: string = event.data
+        console.log(`Got parsed result: ${parsed_word}`)
+        if (parsed_word == "<unknown_gesture>") { return }
+        const time_now = Date.now()
+        const should_cut_sentence = time_now - last_translation_got.current > threshold__cut_sentence_time_limit
+        last_translation_got.current = time_now
+
+        setTranslatedTexts(
+            function (old_texts)
+            {
+                if (old_texts.length > 20) { return [parsed_word] }
+                else
+                {
+                    if (should_cut_sentence && old_texts.length != 0) { return [...old_texts, ".", parsed_word] }
+                    else { return [...old_texts, parsed_word] }
+                }
+            }
+        )
     }
 
     return getReturnContent()

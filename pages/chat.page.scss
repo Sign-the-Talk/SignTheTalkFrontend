@@ -48,5 +48,15 @@
     #right_panel
     {
         width: max(64vw, 640px);
+        font-size: 2vw;
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        align-content: center;
+
+        .word
+        {
+            margin: 0.5vw 2vw;
+        }
     }
 }
