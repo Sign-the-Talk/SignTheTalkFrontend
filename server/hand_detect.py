@@ -42,7 +42,7 @@ def getGestureDetectorsGenerator():
         global sequence, sentence
         keypoints = extract_keypoints(landmarks)
         sequence.append(keypoints)
-        # sequence = sequence[-detect_buffer_length:]
+        sequence = sequence[-detect_buffer_length:]
         if len(sequence) == detect_buffer_length:
             predict_result = model.predict(np.expand_dims(sequence, axis=0))
             if predict_result is None: raise ValueError(f"Cannot predict with keypoints `{keypoints}`.")
@@ -50,4 +50,4 @@ def getGestureDetectorsGenerator():
             gesture_meaning = actions[np.argmax(res)]
             # print(gesture_meaning)
             yield gesture_meaning
-            sequence = []
+            # sequence = []
